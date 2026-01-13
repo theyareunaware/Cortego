@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { SplitText } from './ReactBits';
 
@@ -54,4 +54,4 @@ const Hero: React.FC = () => {
   );
 };
 
-export default Hero;
+export default memo(Hero);

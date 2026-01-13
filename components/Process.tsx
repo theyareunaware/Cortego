@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
 const Process: React.FC = () => {
@@ -8,19 +8,20 @@ const Process: React.FC = () => {
       id: '01',
       title: 'Discovery',
       description: 'We map your business needs to a detailed technical roadmap with clear milestones.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6SUQRNGxqD5kOEM8d9YXpAyxYNJQEyFwApGTuy2QoLB-6uqnyik-3l2xdylVeCLNHirsfTeOA9CtE7Ps6eHMGBplAjMaINfTuLTNJaVeb-UDAVBEf1eZiSlHfYskD5-kLGC6dgkchImxDSRXCmDqlAS6PMr78IFB9cZ6nJ68aGqJWLcWo95JQBf6q4nAkE-iqiB6tU-4b_XfZZNvS6mfVhNZiPhJ9H2cUngLiut83Gex3NUH-37UdfQzDHP95ViBQThYmZvMslSE'
+      // Optimized with width parameter
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB6SUQRNGxqD5kOEM8d9YXpAyxYNJQEyFwApGTuy2QoLB-6uqnyik-3l2xdylVeCLNHirsfTeOA9CtE7Ps6eHMGBplAjMaINfTuLTNJaVeb-UDAVBEf1eZiSlHfYskD5-kLGC6dgkchImxDSRXCmDqlAS6PMr78IFB9cZ6nJ68aGqJWLcWo95JQBf6q4nAkE-iqiB6tU-4b_XfZZNvS6mfVhNZiPhJ9H2cUngLiut83Gex3NUH-37UdfQzDHP95ViBQThYmZvMslSE=w600'
     },
     {
       id: '02',
       title: 'Development',
       description: 'Clean, scalable Laravel code built with industry best practices and rapid iterations.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKQ5YNaKE1wqgcB5g2ABk_W3BCfB_PAbDU7ZLK1r729X8CS6Go2RYLz6IyWjTsekjFiKo0guqc8xTeWsqfy2HDR5EynOg4UvMw7K594DB4A5fFAbSFyT1fYm4frfvR_pT4Ikv1CdFIAR3IN0lS-NI12eYxEhPGAgiOEzRyxE9FgxeavATqm8dppm2Ax1oRMy2inFOeoQlLTkcmJvZI9xkG9BRIs3IYWUmFNtyL6b5QyOZxst4FMhA7ihnt46ilLASkSl8PQlr2-6g'
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKQ5YNaKE1wqgcB5g2ABk_W3BCfB_PAbDU7ZLK1r729X8CS6Go2RYLz6IyWjTsekjFiKo0guqc8xTeWsqfy2HDR5EynOg4UvMw7K594DB4A5fFAbSFyT1fYm4frfvR_pT4Ikv1CdFIAR3IN0lS-NI12eYxEhPGAgiOEzRyxE9FgxeavATqm8dppm2Ax1oRMy2inFOeoQlLTkcmJvZI9xkG9BRIs3IYWUmFNtyL6b5QyOZxst4FMhA7ihnt46ilLASkSl8PQlr2-6g=w600'
     },
     {
       id: '03',
       title: 'Deployment',
       description: 'Seamless launch and ongoing support to ensure uptime and performance stability.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDiN3OZddIR8Ky5h217wpY5qc0i8TCsVGsZSqDK6lC1zJvEJr6HE7lNxIj2-ZuOSVwrixwxWnMcIQIIiEyv_A6-1mOttnMYnGlRjsjp1LE2NSML0NJUSsJU3veEhWLKP3GhyHu9wBJD0i-Iar5jJNBsEP4ZVv35tkhQcRq4JxACAMJ21Ai2oBHzbomD_ftxz2qVu8HigCGwP2R2xSP8Pnqu8779_RlJaNLCdqSQzP4C6j7v7M8wanjws7-13Vn0k9Zw3X2miVo4YTM'
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDiN3OZddIR8Ky5h217wpY5qc0i8TCsVGsZSqDK6lC1zJvEJr6HE7lNxIj2-ZuOSVwrixwxWnMcIQIIiEyv_A6-1mOttnMYnGlRjsjp1LE2NSML0NJUSsJU3veEhWLKP3GhyHu9wBJD0i-Iar5jJNBsEP4ZVv35tkhQcRq4JxACAMJ21Ai2oBHzbomD_ftxz2qVu8HigCGwP2R2xSP8Pnqu8779_RlJaNLCdqSQzP4C6j7v7M8wanjws7-13Vn0k9Zw3X2miVo4YTM=w600'
     }
   ];
 
@@ -55,11 +56,15 @@ const Process: React.FC = () => {
               transition={{ delay: idx * 0.1 }}
               className="flex flex-col"
             >
-              <div className="border-4 border-white bg-black aspect-video mb-8 overflow-hidden grayscale contrast-125">
+              <div className="border-4 border-white bg-zinc-800 aspect-video mb-8 overflow-hidden grayscale contrast-125 relative">
                 <img 
                   alt={step.title} 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-all hover:scale-105 duration-700" 
                   src={step.image}
+                  width="600"
+                  height="337"
                 />
               </div>
               <div className="flex gap-4 items-start">
@@ -77,4 +82,4 @@ const Process: React.FC = () => {
   );
 };
 
-export default Process;
+export default memo(Process);
