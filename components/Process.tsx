@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Process: React.FC = () => {
   const steps = [
@@ -24,15 +25,36 @@ const Process: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-zinc-900 stark-section" id="work">
+    <section className="py-24 md:py-32 bg-zinc-900 stark-section" id="work">
       <div className="max-w-[1440px] mx-auto px-6">
-        <div className="text-center mb-24">
-          <h2 className="text-4xl md:text-6xl font-black mb-6 uppercase">Transparent Process</h2>
-          <p className="text-primary font-bold tracking-widest uppercase">Built for business outcomes, not just lines of code.</p>
+        <div className="text-center mb-16 md:mb-24">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-6xl font-black mb-6 uppercase"
+          >
+            Transparent Process
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-primary font-bold tracking-widest uppercase text-sm md:text-base"
+          >
+            Built for business outcomes, not just lines of code.
+          </motion.p>
         </div>
-        <div className="grid md:grid-cols-3 gap-12">
-          {steps.map((step) => (
-            <div key={step.id} className="flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12">
+          {steps.map((step, idx) => (
+            <motion.div 
+              key={step.id} 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="flex flex-col"
+            >
               <div className="border-4 border-white bg-black aspect-video mb-8 overflow-hidden grayscale contrast-125">
                 <img 
                   alt={step.title} 
@@ -41,13 +63,13 @@ const Process: React.FC = () => {
                 />
               </div>
               <div className="flex gap-4 items-start">
-                <span className="text-5xl font-display font-black text-primary opacity-50">{step.id}</span>
+                <span className="text-4xl md:text-5xl font-display font-black text-primary opacity-50">{step.id}</span>
                 <div>
-                  <h4 className="text-2xl font-black mb-4 uppercase">{step.title}</h4>
-                  <p className="text-zinc-400 normal-case leading-relaxed">{step.description}</p>
+                  <h4 className="text-xl md:text-2xl font-black mb-4 uppercase">{step.title}</h4>
+                  <p className="text-zinc-400 normal-case leading-relaxed text-sm md:text-base">{step.description}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

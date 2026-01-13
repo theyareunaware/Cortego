@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
+import { SpotlightCard, ShinyText } from './ReactBits';
 
 const Reality: React.FC = () => {
   const cards = [
@@ -21,29 +23,46 @@ const Reality: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-black stark-section" id="reality">
+    <section className="py-24 md:py-32 bg-black stark-section" id="reality">
       <div className="max-w-[1440px] mx-auto px-6">
-        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="max-w-3xl">
-            <span className="text-primary font-black tracking-[0.3em] text-sm block mb-4">/THE REALITY/</span>
-            <h2 className="text-4xl md:text-6xl font-black leading-none">BUILDING SOFTWARE <br />SHOULDN'T BE YOUR <br />BOTTLENECK.</h2>
-          </div>
-          <p className="text-zinc-500 text-lg max-w-md normal-case leading-snug">
+        <div className="mb-24 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl"
+          >
+            <span className="font-black tracking-[0.3em] text-sm block mb-4 uppercase">
+              /<ShinyText text="THE REALITY" />/
+            </span>
+            <h2 className="text-3xl md:text-6xl font-black leading-none">BUILDING SOFTWARE <br />SHOULDN'T BE YOUR <br />BOTTLENECK.</h2>
+          </motion.div>
+          <motion.p 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="text-zinc-500 text-lg max-w-md normal-case leading-snug"
+          >
             We handle the technical debt so you can focus on growth. Most businesses fail because they lack the execution power to match their vision.
-          </p>
+          </motion.p>
         </div>
-        <div className="grid md:grid-cols-3 gap-0 border-4 border-white">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-4 border-white">
           {cards.map((card, idx) => (
-            <div 
-              key={idx} 
-              className={`p-12 border-white hover:bg-zinc-900 transition-colors ${
+            <SpotlightCard key={idx} className={`border-white ${
                 idx !== cards.length - 1 ? 'border-b-4 md:border-b-0 md:border-r-4' : ''
-              }`}
-            >
-              <span className="material-symbols-outlined text-primary text-5xl mb-8">{card.icon}</span>
-              <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">{card.title}</h3>
-              <p className="text-zinc-400 text-sm leading-relaxed normal-case">{card.description}</p>
-            </div>
+              }`}>
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="p-10 md:p-12 h-full"
+              >
+                <span className="material-symbols-outlined text-primary text-5xl mb-8">{card.icon}</span>
+                <h3 className="text-xl md:text-2xl font-black mb-6 uppercase tracking-tight">{card.title}</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed normal-case">{card.description}</p>
+              </motion.div>
+            </SpotlightCard>
           ))}
         </div>
       </div>

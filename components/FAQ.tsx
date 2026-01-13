@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -20,31 +21,41 @@ const FAQ: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-zinc-900 stark-section">
+    <section className="py-24 md:py-32 bg-zinc-900 stark-section">
       <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-4xl font-black mb-16 text-center uppercase">Common Questions</h2>
+        <h2 className="text-3xl md:text-4xl font-black mb-16 text-center uppercase">Common Questions</h2>
         <div className="space-y-0 border-4 border-white">
           {faqs.map((faq, idx) => (
             <div 
               key={idx} 
-              className={`p-8 hover:bg-black transition-colors cursor-pointer ${
+              className={`p-6 md:p-8 hover:bg-black transition-colors cursor-pointer ${
                 idx !== faqs.length - 1 ? 'border-b-4 border-white' : ''
               }`}
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
             >
-              <div className="flex justify-between items-center text-left font-black text-xl mb-4">
+              <div className="flex justify-between items-center text-left font-black text-lg md:text-xl">
                 {faq.question}
-                <span className={`material-symbols-outlined text-primary transition-transform ${openIndex === idx ? 'rotate-45' : ''}`}>
+                <motion.span 
+                  animate={{ rotate: openIndex === idx ? 45 : 0 }}
+                  className="material-symbols-outlined text-primary"
+                >
                   add
-                </span>
+                </motion.span>
               </div>
-              <div 
-                className={`text-zinc-400 normal-case leading-relaxed transition-all duration-300 overflow-hidden ${
-                  openIndex === idx ? 'max-h-40 opacity-100 mt-4' : 'max-h-0 opacity-0'
-                }`}
-              >
-                {faq.answer}
-              </div>
+              <AnimatePresence>
+                {openIndex === idx && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="text-zinc-400 normal-case leading-relaxed mt-6 text-sm md:text-base">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

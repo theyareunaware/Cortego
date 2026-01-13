@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Portfolio: React.FC = () => {
   const projects = [
@@ -18,12 +19,26 @@ const Portfolio: React.FC = () => {
   ];
 
   return (
-    <section className="py-32 bg-black stark-section" id="portfolio">
+    <section className="py-24 md:py-32 bg-black stark-section" id="portfolio">
       <div className="max-w-[1440px] mx-auto px-6">
-        <h2 className="text-4xl md:text-6xl font-black mb-24 border-l-8 border-primary pl-8 uppercase">Proof we can build</h2>
-        <div className="grid md:grid-cols-2 gap-16">
+        <motion.h2 
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-6xl font-black mb-16 md:mb-24 border-l-8 border-primary pl-8 uppercase"
+        >
+          Proof we can build
+        </motion.h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           {projects.map((project, idx) => (
-            <div key={idx} className="group">
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.2 }}
+              className="group"
+            >
               <div className="border-4 border-white bg-zinc-900 mb-8 overflow-hidden relative">
                 <img 
                   alt={project.title} 
@@ -32,16 +47,16 @@ const Portfolio: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-primary/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
               </div>
-              <h3 className="text-3xl font-black mb-4 tracking-tight">{project.title}</h3>
-              <p className="text-zinc-400 mb-8 normal-case leading-relaxed">{project.description}</p>
+              <h3 className="text-2xl md:text-3xl font-black mb-4 tracking-tight">{project.title}</h3>
+              <p className="text-zinc-400 mb-8 normal-case leading-relaxed text-sm md:text-base">{project.description}</p>
               <div className="flex flex-wrap gap-4">
                 {project.tags.map(tag => (
-                  <span key={tag} className="px-4 py-1 border border-primary text-primary text-xs font-black uppercase tracking-widest">
+                  <span key={tag} className="px-4 py-1 border border-primary text-primary text-[10px] md:text-xs font-black uppercase tracking-widest">
                     {tag}
                   </span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
